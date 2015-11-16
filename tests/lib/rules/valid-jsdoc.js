@@ -429,6 +429,22 @@ ruleTester.run("valid-jsdoc", rule, {
                 type: "Block"
             }]
         },
+        {
+            code: "/** Foo \n@returns void\n */\nfunction foo(){}",
+            options: [{ prefer: { "return": "returns" }}],
+            errors: [{
+                message: "Missing JSDoc return type.",
+                type: "Block"
+            }]
+        },
+        {
+            code: "/** Foo \n@return Foo\n */\nfunction foo(){}",
+            options: [{ prefer: { "return": "return" }}],
+            errors: [{
+                message: "Missing JSDoc return type.",
+                type: "Block"
+            }]
+        },
         // classes
         {
             code:
